@@ -33,6 +33,24 @@
 
 <script>
 
+var btn = document.getElementById('files');
+
+btn.addEventListener('change', function(e)
+		     {
+			 var file = e.target.files[0];
+			 var fr = new FileReader();
+			 fr.onload = function(evt)
+			 {
+			     if (evt.target.readyState == FileReader.DONE)
+				 {
+				     alert(evt.target.result);
+				 }
+			 }
+
+			 var blob = file.slice(0, 10);
+			 fr.readAsText(blob);
+		     }, false);
+
 // TODO make this parsed from a CSV and have it filter non-YT links?
 const urls = [
     "https://www.youtube.com/watch?v=imX-rzdV2KA",
