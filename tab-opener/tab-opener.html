@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+.block {
+  display: block;
+  width: 100%;
+  border: none;
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 28px;
+  font-size: 200px;
+  cursor: pointer;
+  text-align: center;
+} 
+
+.block:hover {
+  background-color: #ddd;
+  color: black;
+}
+</style> 
+</head>
+
+<body>
+
+
+<button class="block" id="next" >next</button>
+<h1 id="lastUrl">last url</h1>
+<button class="block" id="prev" >prev</button>
+<div id="urlsLeft">urls left</div>
+
+<script>
+
+// TODO make this parsed from a CSV and have it filter non-YT links?
+const urls = [
+    "https://www.youtube.com/watch?v=imX-rzdV2KA",
+    "https://www.youtube.com/watch?v=Dr4MM3ECafQ",
+    "https://www.youtube.com/watch?v=lbY9oiNOZcI",
+    "https://www.youtube.com/watch?v=zdlwc1TZYVE",
+    "https://www.youtube.com/watch?v=Dr4MM3ECafQ",
+    "https://www.youtube.com/watch?v=5suF6fkm_4I",
+    "https://www.youtube.com/watch?v=5suF6fkm_4I",
+]
+
+const prev = document.getElementById('prev')
+const next = document.getElementById('next')
+
+let index = 0
+
+const openUrl = n => {
+    window.open(urls[n],"customWindow", "width=960, height=1040, top=0, left=0")
+    document.getElementById("lastUrl").innerHTML = urls[n]
+    document.getElementById("urlsLeft").innerHTML = urls.length - n;
+}
+openUrl(index)
+next.addEventListener('click', () => {
+    index = (index + 1) % urls.length
+    openUrl(index)
+})
+
+prev.addEventListener('click', () => {
+    index = (index + urls.length - 1) % urls.length
+    openUrl(index)
+})
+</script>
+
+</body>
+</html>
